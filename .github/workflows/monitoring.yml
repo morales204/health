@@ -12,11 +12,11 @@ jobs:
     steps:
       - name: Verificar salud del servicio
         run: |
-          curl -f https://morales204.github.io/EventosChiapas/health || (echo "::error::El endpoint /health falló" && exit 1)
+          curl -f https://www.unam.mx/health || (echo "::error::El endpoint /health falló" && exit 1)
 
       - name: Consultar métricas Prometheus
         run: |
-          curl -f https://morales204.github.io/EventosChiapas/metrics > metrics.txt || echo "::warning::No se pudo acceder a /metrics"
+          curl -f https://www.unam.mx/metrics > metrics.txt || echo "::warning::No se pudo acceder a /metrics"
           cat metrics.txt
 
       - name: Analizar métricas
@@ -27,7 +27,7 @@ jobs:
 
       - name: Obtener logs
         run: |
-          curl -f https://morales204.github.io/EventosChiapas/logs/latest > logs.json || echo "::warning::No se pudieron obtener logs"
+          curl -f https://www.unam.mx/logs/latest > logs.json || echo "::warning::No se pudieron obtener logs"
           cat logs.json
 
       - name: Analizar logs
@@ -38,7 +38,7 @@ jobs:
 
       - name: Verificar trazas
         run: |
-          curl -f https://morales204.github.io/EventosChiapas/v1/traces \
+          curl -f https://www.unam.mx/v1/traces \
             || echo "::warning::No se encontraron trazas recientes"
 
       - name: Finalizar monitoreo
